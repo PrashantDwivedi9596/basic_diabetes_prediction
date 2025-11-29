@@ -6,11 +6,18 @@ Created on 29/11/2025
 import numpy as np
 import pickle
 import streamlit as st
+import os
+
+
+
+
 
 # Load the trained pipeline model (scaler + classifier)
 @st.cache_resource
 def load_model():
-    return pickle.load(open("trained_model.sav", "rb"))
+    model_path = os.path.join(os.path.dirname(__file__), "trained_model.sav")
+    with open(model_path, "rb") as f:
+        return pickle.load(f)
 
 model = load_model()
 
